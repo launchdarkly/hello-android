@@ -33,6 +33,6 @@ public class MainActivity extends AppCompatActivity {
             Log.i(TAG, "Not Showing feature");
         }
 
-
+        client.flush();
     }
 }
