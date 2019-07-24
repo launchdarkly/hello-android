@@ -1,8 +1,9 @@
 package com.launchdarkly.hello_android;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.launchdarkly.android.LDClient;
 import com.launchdarkly.android.LDConfig;
