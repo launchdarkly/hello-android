@@ -32,9 +32,7 @@ public class MainActivity extends AppCompatActivity {
         LDClient client = LDClient.init(getApplication(), ldConfig, user, 5);
 
         if (client.boolVariation(FLAG_KEY, false)) {
-            Log.i(TAG, "Feature flag FLAG_KEY is true for this user");
-        } else {
-            Log.i(TAG, "Feature flag FLAG_KEY is false for this user");
+            Log.i(TAG, "Feature flag '" + FLAG_KEY + "' is " + flagValue + " for this user");
         }
 
         client.flush();
