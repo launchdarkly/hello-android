@@ -31,8 +31,8 @@ public class MainActivity extends AppCompatActivity {
 
         LDClient client = LDClient.init(getApplication(), ldConfig, user, 5);
 
-        boolean flagValue = client.boolVariation(FLAG_KEY, false)
-                Log.i(TAG, "Feature flag [%s] is [%s] for this user", FLAG_KEY, flagValue)
+        boolean flagValue = client.boolVariation(FLAG_KEY, false);
+        Log.i(TAG, String.format("Feature flag [%s] is [%s] for this user", FLAG_KEY, flagValue));
 
         client.flush();
     }
