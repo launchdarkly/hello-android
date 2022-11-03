@@ -1,6 +1,6 @@
 # LaunchDarkly sample Android application 
 
-We've built a simple mobile application that demonstrates how LaunchDarkly's SDK works.  Below, you'll find the basic build procedure, but for more comprehensive instructions, you can visit your [Quickstart page](https://app.launchdarkly.com/quickstart#/) or the [Android reference guide](https://docs.launchdarkly.com/sdk/android).
+We've built a simple mobile application that demonstrates how LaunchDarkly's SDK works.  Below, you'll find the basic build procedure, but for more comprehensive instructions, you can visit your [Quickstart page](https://app.launchdarkly.com/quickstart#/) or the [Android reference guide](https://docs.launchdarkly.com/sdk/client-side/android).
 
 ## Build instructions 
 
