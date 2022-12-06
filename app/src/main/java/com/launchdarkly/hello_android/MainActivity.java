@@ -5,7 +5,7 @@ import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.launchdarkly.sdk.LDUser;
+import com.launchdarkly.sdk.LDContext;
 import com.launchdarkly.sdk.android.LDClient;
 import com.launchdarkly.sdk.android.LDConfig;
 
@@ -24,15 +24,16 @@ public class MainActivity extends AppCompatActivity {
                 .mobileKey("MOBILE_KEY")
                 .build();
 
-// Set up the user properties. This user should appear on your LaunchDarkly users dashboard soon after you run the demo.
-        LDUser user = new LDUser.Builder("example-user-key")
+// Set up the evaluation context. This context should appear on your LaunchDarkly contexts
+// dashboard soon after you run the demo.
+        LDContext context = LDContext.builder("example-user-key")
                 .name("Sandy")
                 .build();
 
-        LDClient client = LDClient.init(getApplication(), ldConfig, user, 5);
+        LDClient client = LDClient.init(getApplication(), ldConfig, context, 5);
 
         boolean flagValue = client.boolVariation(FLAG_KEY, false);
-        Log.i(TAG, String.format("Feature flag [%s] is [%s] for this user", FLAG_KEY, flagValue));
+        Log.i(TAG, String.format("Feature flag [%s] is [%s] for this context", FLAG_KEY, flagValue));
 
         client.flush();
     }
