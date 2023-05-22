@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">hello-android</string>
+    <string name="flag_evaluated">Feature flag \'%1$s\' is %2$s</string>
 </resources>
