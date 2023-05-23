@@ -1,24 +1,21 @@
 package com.launchdarkly.hello_android
 
 import android.os.Bundle
+import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.launchdarkly.hello_android.MainApplication.Companion.LAUNCHDARKLY_MOBILE_KEY
-import com.launchdarkly.hello_android.databinding.ActivityMainBinding
 import com.launchdarkly.sdk.android.LDClient
 
 class MainActivity : AppCompatActivity() {
-
-    private lateinit var binding: ActivityMainBinding
 
     // Set BOOLEAN_FLAG_KEY to the feature flag key you want to evaluate.
     val BOOLEAN_FLAG_KEY = "my-boolean-flag"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        setContentView(R.layout.activity_main)
+        val textView : TextView = findViewById(R.id.textview)
 
         if (BOOLEAN_FLAG_KEY == "my-boolean-flag") {
             val builder = AlertDialog.Builder(this)
@@ -35,7 +32,7 @@ class MainActivity : AppCompatActivity() {
         val client = LDClient.get()
 
         // to get the variation the SDK has cached
-        binding.textview.text = getString(
+        textView.text = getString(
             R.string.flag_evaluated,
             BOOLEAN_FLAG_KEY,
             client.boolVariation(BOOLEAN_FLAG_KEY, false).toString()
@@ -43,7 +40,7 @@ class MainActivity : AppCompatActivity() {
 
         // to register a listener to get updates in real time
         client.registerFeatureFlagListener(BOOLEAN_FLAG_KEY) {
-            binding.textview.text = getString(
+            textView.text = getString(
                 R.string.flag_evaluated,
                 BOOLEAN_FLAG_KEY,
                 client.boolVariation(BOOLEAN_FLAG_KEY, false).toString()

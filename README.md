@@ -15,4 +15,4 @@ We've built a simple mobile application that demonstrates how LaunchDarkly's SDK
 
 3. Run your application through the Emulator or on a real device.
 
-You should receive the message ”Feature flag ‘<flag key>’ is <true/false> for this user”.
+You should receive the message ”Feature flag ‘<flag key>’ is <true/false> for this context”.
