@@ -19,13 +19,13 @@ class MainActivity : AppCompatActivity() {
 
         if (BOOLEAN_FLAG_KEY == "my-boolean-flag") {
             val builder = AlertDialog.Builder(this)
-            builder.setMessage("BOOLEAN_FLAG_KEY was not customized for your account.")
+            builder.setMessage("BOOLEAN_FLAG_KEY was not customized for this application.")
             builder.create().show()
         }
 
         if (LAUNCHDARKLY_MOBILE_KEY == "mobile-key-from-launch-darkly-website") {
             val builder = AlertDialog.Builder(this)
-            builder.setMessage("LAUNCHDARKLY_MOBILE_KEY was not customized for your account.")
+            builder.setMessage("LAUNCHDARKLY_MOBILE_KEY was not customized for this application.")
             builder.create().show()
         }
 
