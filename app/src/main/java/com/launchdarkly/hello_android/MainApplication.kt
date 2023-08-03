@@ -5,6 +5,7 @@ import com.launchdarkly.sdk.ContextKind
 import com.launchdarkly.sdk.LDContext
 import com.launchdarkly.sdk.android.LDClient
 import com.launchdarkly.sdk.android.LDConfig
+import com.launchdarkly.sdk.android.LDConfig.Builder.AutoEnvAttributes
 
 class MainApplication : Application() {
 
@@ -19,7 +20,9 @@ class MainApplication : Application() {
 
         // Set LAUNCHDARKLY_MOBILE_KEY to your LaunchDarkly mobile key found on the LaunchDarkly
         // dashboard in the start guide.
-        val ldConfig = LDConfig.Builder()
+        // If you want to disable the Auto EnvironmentAttributes functionality.
+        // Use AutoEnvAttributes.Disabled as the argument to the Builder
+        val ldConfig = LDConfig.Builder(AutoEnvAttributes.Enabled)
             .mobileKey(LAUNCHDARKLY_MOBILE_KEY)
             .build()
 
