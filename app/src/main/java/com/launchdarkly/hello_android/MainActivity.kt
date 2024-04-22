@@ -19,12 +19,6 @@ class MainActivity : AppCompatActivity() {
         val textView : TextView = findViewById(R.id.textview)
         val fullView : View = window.decorView
 
-        if (BOOLEAN_FLAG_KEY == "sample-feature") {
-            val builder = AlertDialog.Builder(this)
-            builder.setMessage("BOOLEAN_FLAG_KEY was not customized for this application.")
-            builder.create().show()
-        }
-
         if (LAUNCHDARKLY_MOBILE_KEY == "mobile-key-from-launch-darkly-website") {
             val builder = AlertDialog.Builder(this)
             builder.setMessage("LAUNCHDARKLY_MOBILE_KEY was not customized for this application.")
