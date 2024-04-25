@@ -17,8 +17,8 @@ Below, you'll find the build procedure. For more comprehensive instructions, you
 
 3. Run your application through the Emulator or on a real device.
 
-You should see the message "The <flagKey> feature flag evaluates to <flagValue>.", the application will run continuously and react to the flag changes in LaunchDarkly.
+You should see the message "The <flagKey> feature flag evaluates to <flagValue>.". The application will run continuously and react to the flag changes in LaunchDarkly.
 
 ## Looking for a Java example?
 
-You can find an example mobile application written in Java in [this Github repository](https://github.com/launchdarkly/hello-android-java).
+You can find an example mobile application written in Java in [this GitHub repository](https://github.com/launchdarkly/hello-android-java).
