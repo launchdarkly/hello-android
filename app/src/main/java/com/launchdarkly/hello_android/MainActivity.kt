@@ -1,17 +1,22 @@
 package com.launchdarkly.hello_android
 
+import android.app.Activity
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import com.launchdarkly.hello_android.MainApplication.Companion.LAUNCHDARKLY_MOBILE_KEY
 import com.launchdarkly.sdk.android.LDClient
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     // Set BOOLEAN_FLAG_KEY to the feature flag key you want to evaluate.
     val BOOLEAN_FLAG_KEY = "sample-feature"
+
+    @Inject
+    lateinit var client: LDClient;
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -19,13 +24,6 @@ class MainActivity : AppCompatActivity() {
         val textView : TextView = findViewById(R.id.textview)
         val fullView : View = window.decorView
 
-        if (LAUNCHDARKLY_MOBILE_KEY == "mobile-key-from-launch-darkly-website") {
-            val builder = AlertDialog.Builder(this)
-            builder.setMessage("LAUNCHDARKLY_MOBILE_KEY was not customized for this application.")
-            builder.create().show()
-        }
-
-        val client = LDClient.get()
         val flagValue = client.boolVariation(BOOLEAN_FLAG_KEY, false)
 
         // to get the variation the SDK has cached
