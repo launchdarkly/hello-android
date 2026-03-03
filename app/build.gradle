@@ -4,11 +4,12 @@ plugins {
 }
 
 android {
-    compileSdkVersion(33)
+    namespace "com.launchdarkly.hello_android"
+    compileSdk 34
     defaultConfig {
         applicationId "com.launchdarkly.hello_android"
-        minSdkVersion(21)
-        targetSdkVersion(33)
+        minSdkVersion(24)
+        targetSdkVersion(34)
         versionCode 1
         versionName "1.0"
     }
