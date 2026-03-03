@@ -13,9 +13,28 @@ on:
 jobs:
   run:
     runs-on: ubuntu-22.04
+    permissions:
+      id-token: write
+      contents: read
     steps:
       # https://github.com/actions/checkout/releases/tag/v4.2.2
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+
+      # https://github.com/launchdarkly/gh-actions/releases/tag/release-secrets-v1.2.0
+      - uses: launchdarkly/gh-actions/actions/release-secrets@bbbbbda684f500766264e7fe327668094ba83d1c # release-secrets-v1.2.0
+        name: 'Get mobile key and flag key'
+        with:
+          aws_assume_role: ${{ vars.AWS_ROLE_ARN }}
+          ssm_parameter_pairs: '/sdk/common/hello-apps/mobile-key = LAUNCHDARKLY_MOBILE_KEY,
+            /sdk/common/hello-apps/boolean-flag-key = LAUNCHDARKLY_FLAG_KEY'
+
+      - name: Configure SDK mobile key
+        run: |
+          sed -i "s/mobile-key-from-launch-darkly-website/$LAUNCHDARKLY_MOBILE_KEY/" app/src/main/java/com/launchdarkly/hello_android/MainApplication.kt
+
+      - name: Configure feature flag key
+        run: |
+          sed -i "s/sample-feature/$LAUNCHDARKLY_FLAG_KEY/" app/src/main/java/com/launchdarkly/hello_android/MainActivity.kt
 
       # https://github.com/actions/setup-java/releases/tag/v4.7.1
       - name: Setup Java
@@ -53,13 +72,5 @@ jobs:
           script: |
             adb install app/build/outputs/apk/debug/app-debug.apk
             adb shell am start -n com.launchdarkly.hello_android/.MainActivity
-            sleep 10
-            adb shell dumpsys activity activities | grep -i "hello_android"
-
-      # https://github.com/actions/upload-artifact/releases/tag/v4.6.2
-      - name: Upload APK
-        if: always()
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
-        with:
-          name: app-debug
-          path: app/build/outputs/apk/debug/app-debug.apk
+            sleep 15
+            adb exec-out uiautomator dump /dev/tty | grep -o 'feature flag evaluates to true'
