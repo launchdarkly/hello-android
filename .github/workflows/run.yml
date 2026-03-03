@@ -1,0 +1,65 @@
+name: Run
+
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - '**.md'
+  pull_request:
+    branches: [main]
+    paths-ignore:
+      - '**.md'
+
+jobs:
+  run:
+    runs-on: ubuntu-22.04
+    steps:
+      # https://github.com/actions/checkout/releases/tag/v4.2.2
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+
+      # https://github.com/actions/setup-java/releases/tag/v4.7.1
+      - name: Setup Java
+        uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00 # v4.7.1
+        with:
+          distribution: temurin
+          java-version: 17
+          cache: 'gradle'
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+
+      - name: Build debug APK
+        run: ./gradlew assembleDebug
+
+      - name: Enable KVM group perms (for performance)
+        run: |
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules
+          sudo udevadm trigger --name-match=kvm
+
+      # https://github.com/jlumbroso/free-disk-space/releases/tag/v1.3.1
+      - name: Free disk space
+        uses: jlumbroso/free-disk-space@54081f138730dfa15788a46383842cd2f914a1be # v1.3.1
+        with:
+          android: false
+          large-packages: false
+
+      # https://github.com/reactivecircus/android-emulator-runner/releases/tag/v2.34.0
+      - name: Run on emulator
+        uses: reactivecircus/android-emulator-runner@324029e2f414c084d8b15ba075288885e74aef9c # v2.34.0
+        with:
+          api-level: 29
+          arch: x86_64
+          script: |
+            adb install app/build/outputs/apk/debug/app-debug.apk
+            adb shell am start -n com.launchdarkly.hello_android/.MainActivity
+            sleep 10
+            adb shell dumpsys activity activities | grep -i "hello_android"
+
+      # https://github.com/actions/upload-artifact/releases/tag/v4.6.2
+      - name: Upload APK
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: app-debug
+          path: app/build/outputs/apk/debug/app-debug.apk
