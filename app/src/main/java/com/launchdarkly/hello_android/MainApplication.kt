@@ -38,7 +38,7 @@ class MainApplication : Application() {
                 .build()
         }
 
-        LDClient.init(this@MainApplication, ldConfig, context)
+        LDClient.init(this@MainApplication, ldConfig, context, 5)
     }
 
     private fun isUserLoggedIn(): Boolean = false
