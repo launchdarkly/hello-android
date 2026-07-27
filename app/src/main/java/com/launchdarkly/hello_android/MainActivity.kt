@@ -5,6 +5,7 @@ import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.launchdarkly.hello_android.MainApplication.Companion.LAUNCHDARKLY_MOBILE_KEY
 import com.launchdarkly.sdk.android.LDClient
 
@@ -36,11 +37,11 @@ class MainActivity : AppCompatActivity() {
         )
 
         // Style the display
-        textView.setTextColor(resources.getColor(R.color.colorText))
+        textView.setTextColor(ContextCompat.getColor(this, R.color.colorText))
         if(flagValue) {
-            fullView.setBackgroundColor(resources.getColor(R.color.colorBackgroundTrue))
+            fullView.setBackgroundColor(ContextCompat.getColor(this, R.color.colorBackgroundTrue))
         } else {
-            fullView.setBackgroundColor(resources.getColor(R.color.colorBackgroundFalse))
+            fullView.setBackgroundColor(ContextCompat.getColor(this, R.color.colorBackgroundFalse))
         }
 
         // to register a listener to get updates in real time
@@ -52,9 +53,9 @@ class MainActivity : AppCompatActivity() {
                 changedFlagValue.toString()
             )
             if(changedFlagValue) {
-                fullView.setBackgroundColor(resources.getColor(R.color.colorBackgroundTrue))
+                fullView.setBackgroundColor(ContextCompat.getColor(this, R.color.colorBackgroundTrue))
             } else {
-                fullView.setBackgroundColor(resources.getColor(R.color.colorBackgroundFalse))
+                fullView.setBackgroundColor(ContextCompat.getColor(this, R.color.colorBackgroundFalse))
             }
         }
     }
