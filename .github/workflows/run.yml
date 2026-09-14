@@ -63,7 +63,7 @@ jobs:
           android: false
           large-packages: false
 
-      # https://github.com/reactivecircus/android-emulator-runner/releases/tag/v2.34.0
+      # https://github.com/reactivecircus/android-emulator-runner/releases/tag/v2.38.0
       - name: Run on emulator
         uses: reactivecircus/android-emulator-runner@a421e43855164a8197daf9d8d40fe71c6996bb0d # v2.38.0
         with:
