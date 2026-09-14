@@ -17,11 +17,11 @@ jobs:
       id-token: write
       contents: read
     steps:
-      # https://github.com/actions/checkout/releases/tag/v4.2.2
+      # https://github.com/actions/checkout/releases/tag/v7.0.1
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
-      # https://github.com/launchdarkly/gh-actions/releases/tag/release-secrets-v1.2.0
-      - uses: launchdarkly/gh-actions/actions/release-secrets@bbbbbda684f500766264e7fe327668094ba83d1c # release-secrets-v1.2.0
+      # https://github.com/launchdarkly/gh-actions/releases/tag/release-secrets-v1.2.1
+      - uses: launchdarkly/gh-actions/actions/release-secrets@39e06a6826b5f784225cc1e40077204d4306e22c # release-secrets-v1.2.1
         name: 'Get mobile key and flag key'
         with:
           aws_assume_role: ${{ vars.AWS_ROLE_ARN }}
@@ -36,7 +36,7 @@ jobs:
         run: |
           sed -i "s/sample-feature/$LAUNCHDARKLY_FLAG_KEY/" app/src/main/java/com/launchdarkly/hello_android/MainActivity.kt
 
-      # https://github.com/actions/setup-java/releases/tag/v4.7.1
+      # https://github.com/actions/setup-java/releases/tag/v6.0.0
       - name: Setup Java
         uses: actions/setup-java@dd06d9cba3e5552c54d9f8ea23572deb30010f7c # v6.0.0
         with:
