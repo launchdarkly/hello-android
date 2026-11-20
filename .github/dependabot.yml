@@ -10,9 +10,16 @@ updates:
         - 'launchdarkly/*'
 
   - package-ecosystem: 'gradle'
-    directories:
-      - '/'
-      - '/app'
+    directory: '/'
+    schedule:
+      interval: 'monthly'
+    cooldown:
+      default-days: 7
+      exclude:
+        - 'com.launchdarkly:*'
+
+  - package-ecosystem: 'gradle'
+    directory: '/app'
     schedule:
       interval: 'monthly'
     cooldown:
