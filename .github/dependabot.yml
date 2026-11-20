@@ -1,20 +1,21 @@
 version: 2
 updates:
-  - package-ecosystem: "github-actions"
-    directory: "/"
+  - package-ecosystem: 'github-actions'
+    directory: '/'
     schedule:
-      interval: "weekly"
+      interval: 'monthly'
     cooldown:
       default-days: 7
-  - package-ecosystem: "gradle"
-    directory: "/"
+      exclude:
+        - 'launchdarkly/*'
+
+  - package-ecosystem: 'gradle'
+    directories:
+      - '/'
+      - '/app'
     schedule:
-      interval: "weekly"
+      interval: 'monthly'
     cooldown:
       default-days: 7
-  - package-ecosystem: "gradle"
-    directory: "/app"
-    schedule:
-      interval: "weekly"
-    cooldown:
-      default-days: 7
+      exclude:
+        - 'com.launchdarkly:*'
